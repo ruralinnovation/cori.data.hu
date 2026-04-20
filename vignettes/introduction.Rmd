@@ -1,0 +1,177 @@
+---
+title: "Introduction to cori.data.hu"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to cori.data.hu}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse  = TRUE,
+  comment   = "#>",
+  eval      = TRUE,
+  message   = FALSE,
+  warning   = FALSE,
+  fig.width  = 9,
+  fig.height = 6,
+  out.width  = "100%"
+)
+```
+
+## What Is This Data?
+
+The U.S. Census Bureau's **National, State, and County Housing Unit Totals**
+are annual estimates of the total number of housing units in existence —
+occupied and vacant combined. Published under the Population Estimates Program,
+these estimates measure the total housing stock, built from the 2020 Census
+baseline plus annual permitted construction, non-permitted construction, mobile
+home shipments, and estimated housing loss.
+
+**Source:** U.S. Census Bureau, Population Estimates Program
+**Coverage:** 2000–present, updated annually (release typically May)
+**Geography:** County (5-digit FIPS), state (2-digit FIPS), national (`"00"`)
+
+## Variable Reference
+
+```{r codebook}
+library(cori.data.hu)
+
+get_hu_codebook() |> knitr::kable()
+```
+
+## Quick Start
+
+```{r read}
+library(dplyr)
+
+df <- read_hu_from_s3()
+
+dplyr::glimpse(df)
+```
+
+## Rural vs. Nonrural
+
+Housing stock per capita diverges between rural and nonrural counties. The
+chart below shows population-weighted average `housing_units_per_1k_people`
+by rural status using the CBSA 2023 rural definition.
+
+```{r rural-nonrural}
+library(cori.charts)
+library(ggplot2)
+library(ruraldefinitions)
+
+load_fonts()
+
+rural_avg <- df |>
+  filter(variable == "housing_units_per_1k_people", nchar(geoid) == 5) |>
+  left_join(select(cbsa_2023, geoid, is_rural), by = "geoid") |>
+  filter(!is.na(is_rural), !is.na(value), !is.na(agg_var)) |>
+  group_by(year, is_rural) |>
+  summarise(
+    value = sum(value * agg_var, na.rm = TRUE) / sum(agg_var, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+ggplot(rural_avg, aes(x = year, y = value, color = is_rural)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2.5) +
+  scale_color_manual(
+    values = c("Rural" = "#2F6E9B", "Nonrural" = "#7EBDC2"),
+    labels = c("Rural" = "Rural counties", "Nonrural" = "Nonrural counties")
+  ) +
+  scale_x_continuous(
+    breaks = seq(2000, 2024, by = 5),
+    expand = expansion(mult = c(0, 0.02))
+  ) +
+  scale_y_continuous(
+    labels = scales::label_number(accuracy = 0.1),
+    expand = expansion(mult = c(0.02, 0.1))
+  ) +
+  theme_cori() +
+  theme(legend.position = "bottom") +
+  labs(
+    title    = "Rural counties carry more housing units per capita than nonrural",
+    subtitle = "Housing units per 1,000 population, 2000\u20132024",
+    x        = NULL,
+    y        = NULL,
+    color    = NULL,
+    caption  = "Source: CORI analysis of U.S. Census Bureau Housing Unit Estimates."
+  )
+```
+
+## County Spotlight: Grafton County, NH
+
+```{r grafton}
+grafton <- df |>
+  filter(
+    variable == "housing_units_per_1k_people",
+    geoid %in% c("33009", "33", "00")
+  ) |>
+  mutate(
+    group = case_when(
+      geoid == "33009" ~ "Grafton County, NH",
+      geoid == "33"    ~ "New Hampshire",
+      geoid == "00"    ~ "United States"
+    ),
+    group = factor(group, levels = c("Grafton County, NH", "New Hampshire", "United States"))
+  )
+
+grafton_latest <- grafton |>
+  filter(geoid == "33009", year == max(year)) |>
+  pull(value)
+
+grafton_year <- grafton |>
+  filter(geoid == "33009") |>
+  filter(year == max(year)) |>
+  pull(year)
+
+ggplot(grafton, aes(x = year, y = value, color = group,
+                    linetype = group, linewidth = group)) +
+  geom_line(na.rm = TRUE) +
+  geom_point(size = 2.5, na.rm = TRUE) +
+  scale_color_manual(values = c(
+    "Grafton County, NH" = "#2F6E9B",
+    "New Hampshire"      = "#7EBDC2",
+    "United States"      = "#9DA7B0"
+  )) +
+  scale_linetype_manual(values = c(
+    "Grafton County, NH" = "solid",
+    "New Hampshire"      = "dashed",
+    "United States"      = "dotted"
+  )) +
+  scale_linewidth_manual(values = c(
+    "Grafton County, NH" = 1.2,
+    "New Hampshire"      = 0.8,
+    "United States"      = 0.8
+  )) +
+  scale_x_continuous(
+    breaks = seq(2000, 2024, by = 5),
+    expand = expansion(mult = c(0, 0.02))
+  ) +
+  scale_y_continuous(
+    labels = scales::label_number(accuracy = 0.1),
+    expand = expansion(mult = c(0.02, 0.1))
+  ) +
+  theme_cori() +
+  theme(legend.position = "bottom") +
+  labs(
+    title    = paste0(
+      round(grafton_latest, 1),
+      " housing units per 1,000 residents in Grafton County"
+    ),
+    subtitle = paste0("Housing units per 1,000 population, 2000\u2013", grafton_year),
+    x        = NULL,
+    y        = NULL,
+    color    = NULL,
+    linetype = NULL,
+    linewidth = NULL,
+    caption  = paste0(
+      "Source: CORI analysis of U.S. Census Bureau Housing Unit Estimates.\n",
+      "Population denominator from Census Population Estimates Program via cori.data.pep."
+    )
+  )
+```
+
+

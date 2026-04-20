@@ -49,6 +49,13 @@ vignettes/*.pdf
 *.RDS
 *.rds
 *.Rds
+*.xlsx
+*.parquet
 
 .DS_Store
 .idea
+
+# Skills
+skills/
+# Data
+data/

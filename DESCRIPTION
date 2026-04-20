@@ -1,0 +1,27 @@
+Package: cori.data.hu
+Type: Package
+Title: Access and Analyze Census Bureau Housing Unit Estimates
+Version: 0.1.0
+Authors@R: person("Drew", "Rosebush", email = "drew.rosebush@ruralinnovation.us", role = c("aut", "cre"))
+Description: Access and analyze U.S. Census Bureau National, State, and County
+    Housing Unit Totals from 2020 to present. Provides tools to download
+    per-state source files, read processed data from S3, and analyze housing
+    stock by geography. Part of the CORI housing supply data ecosystem.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    DBI,
+    dplyr,
+    duckdb
+Suggests:
+    cori.charts,
+    ruraldefinitions,
+    ggplot2,
+    ggrepel,
+    knitr,
+    rmarkdown,
+    scales
+RoxygenNote: 7.3.3
+VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)

@@ -1,0 +1,6 @@
+^data-raw$
+^data$
+^\.github$
+^.*\.Rproj$
+^RELEASE_CALENDAR\.md$
+^renv\.lock$
