@@ -4,3 +4,4 @@
 ^.*\.Rproj$
 ^RELEASE_CALENDAR\.md$
 ^renv\.lock$
+^\.git$
