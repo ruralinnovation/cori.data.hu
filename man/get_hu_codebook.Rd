@@ -7,17 +7,18 @@
 get_hu_codebook()
 }
 \value{
-A data frame with columns: \code{variable}, \code{label},
+A data frame with columns: \code{variable}, \code{raw_variable}, \code{label},
 \code{unit}, \code{nominal}, \code{notes}.
+\code{raw_variable} is the original name stored in S3 parquet files.
 }
 \description{
 Returns a data frame describing each variable available from
-\code{\link{read_hu_from_s3}}.
+\code{\link[=get_housing_units]{get_housing_units()}}.
 }
 \examples{
 get_hu_codebook()
 
 }
 \seealso{
-\code{\link{read_hu_from_s3}}
+\code{\link[=get_housing_units]{get_housing_units()}}
 }
