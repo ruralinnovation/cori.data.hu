@@ -5,3 +5,4 @@
 ^RELEASE_CALENDAR\.md$
 ^renv\.lock$
 ^\.git$
+^index\.qmd$
