@@ -3,9 +3,9 @@
 
 #' Write processed housing unit data to S3
 #'
-#' Downloads Census per-state housing unit Excel files, computes two variables
-#' (\code{housing_units}, \code{housing_units_per_1k_people}), and writes
-#' vintage-tagged parquet files to S3.
+#' Downloads Census per-state housing unit Excel files, computes three variables
+#' (\code{housing_units}, \code{housing_units_per_1k_people},
+#' \code{housing_unit_change}), and writes vintage-tagged parquet files to S3.
 #'
 #' Requires the \code{cori.data.pep} package and AWS credentials in the
 #' environment (via \code{AWS_ACCESS_KEY_ID}/\code{AWS_SECRET_ACCESS_KEY} or
@@ -26,7 +26,6 @@
 #' @return Invisibly, a list with \code{vintage} and \code{n_rows}.
 #'
 #' @keywords internal
-#' @export
 write_hu_processed_to_s3 <- function(
     vintage_year   = NULL,
     staging_dir    = "data/hu",
@@ -48,7 +47,7 @@ write_hu_processed_to_s3 <- function(
 
   # --- Population denominator from cori.data.pep ---
   message("Pulling population from cori.data.pep...")
-  pop_raw <- cori.data.pep::read_pep_from_s3(
+  pop_raw <- cori.data.pep::get_population(
     variables = "population",
     years     = 2000:vintage_year
   )
@@ -78,7 +77,11 @@ write_hu_processed_to_s3 <- function(
                                        vintage_year = vintage_year,
                                        staging_dir = staging_dir)
 
-  processed   <- dplyr::bind_rows(hu, per_1k)
+  message("Computing housing_unit_change...")
+  change <- pull_housing_unit_change(vintage_year = vintage_year,
+                                     staging_dir = staging_dir)
+
+  processed   <- dplyr::bind_rows(hu, per_1k, change)
   vintage_tag <- sprintf("vintage_%d", vintage_year)
 
   message(sprintf("Vintage: %s | Rows: %s", vintage_tag,

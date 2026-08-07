@@ -8,8 +8,8 @@
 
 
 # Detect the latest available 2020s vintage year by probing Census URLs.
-.probe_latest_hu_year <- function() {
-  current_yr <- as.integer(format(Sys.Date(), "%Y"))
+.probe_latest_hu_year <- function(year = as.integer(format(Sys.Date(), "%Y"))) {
+  current_yr <- year
   for (yr in (current_yr - 1):2021) {
     url <- sprintf(
       "https://www2.census.gov/programs-surveys/popest/tables/2020-%d/housing/totals/CO-EST%d-HU-01.xlsx",
@@ -239,7 +239,6 @@
 #'   (total housing units).
 #'
 #' @keywords internal
-#' @export
 read_hu_raw <- function(vintage_year = NULL, staging_dir = "data/hu") {
 
   if (is.null(vintage_year)) vintage_year <- .probe_latest_hu_year()

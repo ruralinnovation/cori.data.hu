@@ -11,18 +11,27 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
-    cori.data,
+    cori.data.pep,
+    cori.data.s3,
     DBI,
-    dplyr
+    dplyr,
+    duckdb,
+    readxl,
+    stringr,
+    tidyr,
+    tigris,
+    utils
 Remotes:
-    ruralinnovation/cori.data
+  ruralinnovation/cori.charts,
+  ruralinnovation/cori.data.pep,
+  ruralinnovation/cori.data.s3
 Suggests:
     cori.charts,
     ruraldefinitions,
     ggplot2,
     ggrepel,
     knitr,
-    rmarkdown,
+    markdown,
     scales
 RoxygenNote: 7.3.3
 VignetteBuilder: knitr

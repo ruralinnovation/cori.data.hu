@@ -6,3 +6,4 @@
 ^renv\.lock$
 ^\.git$
 ^index\.qmd$
+^docs$
