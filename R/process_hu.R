@@ -11,7 +11,6 @@
 #'   \code{value}, \code{agg_var}.
 #'
 #' @keywords internal
-#' @export
 pull_housing_units <- function(vintage_year = NULL, staging_dir = "data/hu") {
   read_hu_raw(vintage_year = vintage_year, staging_dir = staging_dir) |>
     dplyr::mutate(
@@ -37,7 +36,6 @@ pull_housing_units <- function(vintage_year = NULL, staging_dir = "data/hu") {
 #'   \code{value}, \code{agg_var}.
 #'
 #' @keywords internal
-#' @export
 pull_housing_units_per_1k <- function(pop_df, vintage_year = NULL,
                                       staging_dir = "data/hu") {
   hu <- read_hu_raw(vintage_year = vintage_year, staging_dir = staging_dir)
@@ -70,7 +68,6 @@ pull_housing_units_per_1k <- function(pop_df, vintage_year = NULL,
 #'   \code{value}, \code{agg_var}.
 #'
 #' @keywords internal
-#' @export
 pull_housing_unit_change <- function(vintage_year = NULL, staging_dir = "data/hu") {
   read_hu_raw(vintage_year = vintage_year, staging_dir = staging_dir) |>
     dplyr::mutate(

@@ -26,7 +26,6 @@
 #' @return Invisibly, a list with \code{vintage} and \code{n_rows}.
 #'
 #' @keywords internal
-#' @export
 write_hu_processed_to_s3 <- function(
     vintage_year   = NULL,
     staging_dir    = "data/hu",
