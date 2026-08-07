@@ -41,9 +41,9 @@ https://www.census.gov/programs-surveys/popest/about/schedule.html
 devtools::load_all()
 
 # 2. Source the maintainer scripts in order
-source("data-raw/read_hu_raw.R")
-source("data-raw/process_hu.R")
-source("data-raw/write_hu_to_s3.R")
+source("R/read_hu_raw.R")
+source("R/process_hu.R")
+source("R/write_hu_to_s3.R")
 
 # 3. Test with a staging prefix before touching production
 write_hu_processed_to_s3(

@@ -14,38 +14,26 @@ read_hu_from_s3(
 )
 }
 \arguments{
-\item{vintage}{Character. Vintage to read, e.g. \code{"2024"}.
-Default: \code{"latest"}.}
+\item{vintage}{Passed to \code{\link[=get_housing_units]{get_housing_units()}}.}
 
-\item{variables}{Character vector. Variables to return. Default: all.
-See \code{\link{get_hu_codebook}} for names.}
+\item{variables}{Passed to \code{\link[=get_housing_units]{get_housing_units()}}.}
 
-\item{years}{Integer vector. Years to return. Default: all.}
+\item{years}{Passed to \code{\link[=get_housing_units]{get_housing_units()}}.}
 
-\item{geoids}{Character vector. FIPS codes to return. Default: all.}
+\item{geoids}{Passed to \code{\link[=get_housing_units]{get_housing_units()}}.}
 
-\item{s3_bucket}{Character. S3 bucket name. Default: \code{"cori.data.hu"}.}
+\item{s3_bucket}{Ignored. No longer configurable in the public API.}
 
-\item{s3_path_prefix}{Character. Optional prefix. Default: \code{""}.}
+\item{s3_path_prefix}{Ignored. No longer configurable in the public API.}
 }
 \value{
-A data frame with columns: \code{geoid}, \code{year},
-\code{variable}, \code{value}, \code{agg_var}.
+A data frame. See \code{\link[=get_housing_units]{get_housing_units()}} for details.
 }
 \description{
-Queries CORI's processed housing unit estimate parquet files from S3 using
-DuckDB. Returns long-format data — one row per geoid/year/variable.
-}
-\examples{
-\dontrun{
-# All data, latest vintage
-df <- read_hu_from_s3()
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-# Specific years and geoids
-df <- read_hu_from_s3(years = 2020:2024, geoids = c("33009", "33", "00"))
-}
-
+\code{read_hu_from_s3()} is deprecated. Use \code{\link[=get_housing_units]{get_housing_units()}} instead.
 }
 \seealso{
-\code{\link{latest_hu_vintage}}, \code{\link{get_hu_codebook}}
+\code{\link[=get_housing_units]{get_housing_units()}}
 }
