@@ -10,9 +10,10 @@ Description: Access and analyze U.S. Census Bureau National, State, and County
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Depends:
+    cori.data.s3
 Imports:
     cori.data.pep,
-    cori.data.s3,
     DBI,
     dplyr,
     duckdb,

@@ -4,6 +4,9 @@
 #' State, and County Housing Unit Totals. Data cover 2000–present at annual
 #' frequency for county, state, and national geographies.
 #'
+#' @import DBI
+#' @importFrom cori.data.s3 connect_to_s3
+#'
 #' @param geography Character. Geographic level to return: `"all"`, `"county"`,
 #'   `"state"`, or `"nation"`. Ignored when `geoids` is provided. Default: `"all"`.
 #' @param years Integer vector. Years to return. Default: all available.

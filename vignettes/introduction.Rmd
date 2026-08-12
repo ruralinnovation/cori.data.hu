@@ -69,8 +69,12 @@ library(dplyr)
 
 load_fonts()
 
+df <- get_housing_units(
+  geography = "county",
+  variables = "housing_units_per_1k_people"
+)
+
 rural_avg <- df |>
-  filter(variable == "housing_units_per_1k_people") |>
   left_join(select(cbsa_2023, geoid, is_rural), by = "geoid") |>
   filter(!is.na(is_rural), !is.na(value), !is.na(agg_var)) |>
   group_by(year, is_rural) |>

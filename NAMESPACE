@@ -3,3 +3,5 @@
 export(get_housing_units)
 export(get_hu_codebook)
 export(read_hu_from_s3)
+import(DBI)
+importFrom(cori.data.s3,connect_to_s3)
