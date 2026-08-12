@@ -8,3 +8,4 @@
 ^index\.qmd$
 ^docs$
 ^\.idea$
+^_pkgdown\.yml$
