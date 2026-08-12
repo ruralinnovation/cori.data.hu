@@ -8,6 +8,7 @@ Description: Access and analyze U.S. Census Bureau National, State, and County
     per-state source files, read processed data from S3, and analyze housing
     stock by geography. Part of the CORI housing supply data ecosystem.
 License: MIT + file LICENSE
+URL: https://ruralinnovation.github.io/cori.data.hu
 Encoding: UTF-8
 LazyData: true
 Depends:

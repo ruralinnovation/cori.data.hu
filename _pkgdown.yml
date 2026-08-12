@@ -1,0 +1,23 @@
+url: https://ruralinnovation.github.io/cori.data.hu
+
+template:
+  bootstrap: 5
+
+reference:
+- title: Housing Units
+  contents:
+  - get_housing_units
+
+- title: Utilities
+  contents:
+  - get_hu_codebook
+  - read_hu_from_s3
+
+- title: Internal
+  desc: Functions for data processing and maintenance
+  contents:
+  - pull_housing_unit_change
+  - pull_housing_units
+  - pull_housing_units_per_1k
+  - read_hu_raw
+  - write_hu_processed_to_s3
