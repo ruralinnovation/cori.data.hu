@@ -23,9 +23,9 @@ Imports:
     tigris,
     utils
 Remotes:
-  ruralinnovation/cori.charts,
-  ruralinnovation/cori.data.pep,
-  ruralinnovation/cori.data.s3
+    ruralinnovation/cori.charts,
+    ruralinnovation/cori.data.pep,
+    ruralinnovation/cori.data.s3
 Suggests:
     cori.charts,
     ruraldefinitions,
