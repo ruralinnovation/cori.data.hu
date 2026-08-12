@@ -10,6 +10,8 @@ Description: Access and analyze U.S. Census Bureau National, State, and County
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Depends:
+    cori.data.s3
 Imports:
     cori.data.pep,
     DBI,
@@ -21,8 +23,9 @@ Imports:
     tigris,
     utils
 Remotes:
-  ruralinnovation/cori.charts,
-  ruralinnovation/cori.data.pep
+    ruralinnovation/cori.charts,
+    ruralinnovation/cori.data.pep,
+    ruralinnovation/cori.data.s3
 Suggests:
     cori.charts,
     ruraldefinitions,
