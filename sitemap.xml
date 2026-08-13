@@ -1,0 +1,19 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://ruralinnovation.github.io/cori.data.hu/404.html</loc></url>
+<url><loc>https://ruralinnovation.github.io/cori.data.hu/LICENSE-text.html</loc></url>
+<url><loc>https://ruralinnovation.github.io/cori.data.hu/RELEASE_CALENDAR.html</loc></url>
+<url><loc>https://ruralinnovation.github.io/cori.data.hu/articles/index.html</loc></url>
+<url><loc>https://ruralinnovation.github.io/cori.data.hu/articles/introduction.html</loc></url>
+<url><loc>https://ruralinnovation.github.io/cori.data.hu/authors.html</loc></url>
+<url><loc>https://ruralinnovation.github.io/cori.data.hu/index.html</loc></url>
+<url><loc>https://ruralinnovation.github.io/cori.data.hu/reference/get_housing_units.html</loc></url>
+<url><loc>https://ruralinnovation.github.io/cori.data.hu/reference/get_hu_codebook.html</loc></url>
+<url><loc>https://ruralinnovation.github.io/cori.data.hu/reference/index.html</loc></url>
+<url><loc>https://ruralinnovation.github.io/cori.data.hu/reference/pull_housing_unit_change.html</loc></url>
+<url><loc>https://ruralinnovation.github.io/cori.data.hu/reference/pull_housing_units.html</loc></url>
+<url><loc>https://ruralinnovation.github.io/cori.data.hu/reference/pull_housing_units_per_1k.html</loc></url>
+<url><loc>https://ruralinnovation.github.io/cori.data.hu/reference/read_hu_from_s3.html</loc></url>
+<url><loc>https://ruralinnovation.github.io/cori.data.hu/reference/read_hu_raw.html</loc></url>
+<url><loc>https://ruralinnovation.github.io/cori.data.hu/reference/write_hu_processed_to_s3.html</loc></url>
+</urlset>
+
