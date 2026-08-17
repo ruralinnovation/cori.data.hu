@@ -1,10 +1,5 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
-# cori.data.hu
+cori.data.hu
+============
 
 Access and analyze U.S. Census Bureau Housing Unit Estimates at the
 county, state, and national level.
