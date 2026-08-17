@@ -1,12 +1,11 @@
 # Introduction to cori.data.hu
 
 `cori.data.hu` provides annual housing unit estimates from the U.S.
-Census Bureau’s National, State, and County Housing Unit Totals,
-processed and stored in CORI’s S3 data lake. Data cover 2000–present and
-measure the total housing stock — occupied and vacant units combined —
-built from the decennial Census baseline plus annual permitted
-construction, non-permitted construction, mobile home shipments, and
-estimated housing loss.
+Census Bureau’s National, State, and County Housing Unit Totals. Data
+cover 2000–present and measure the total housing stock — occupied and
+vacant units combined — built from the decennial Census baseline plus
+annual permitted construction, non-permitted construction, mobile home
+shipments, and estimated housing loss.
 
 **Source:** U.S. Census Bureau, Population Estimates Program
 **Coverage:** 2000–present, updated annually (release typically May)
@@ -21,12 +20,18 @@ library(cori.data.hu)
 
 get_hu_codebook() |>
   dplyr::select(variable, label, unit, notes) |>
-  knitr::kable()
+  gt::gt() |>
+  gt::cols_label(
+    variable = "Variable",
+    label    = "Label",
+    unit     = "Unit",
+    notes    = "Notes"
+  )
 ```
 
-| variable | label | unit | notes |
-|:---|:---|:---|:---|
-| housing_units | Total housing units | units | Annual July 1 estimate of total housing units (occupied + vacant). Built from decennial Census baseline plus permitted construction, non-permitted construction, mobile home shipments, and housing loss. Coverage: 2000-present (2000-2009 intercensal, 2010-2019, 2020-present). Geography: county (5-digit FIPS), state (2-digit FIPS), national (‘00’). |
+| Variable | Label | Unit | Notes |
+|----|----|----|----|
+| housing_units | Total housing units | units | Annual July 1 estimate of total housing units (occupied + vacant). Built from decennial Census baseline plus permitted construction, non-permitted construction, mobile home shipments, and housing loss. Coverage: 2000-present (2000-2009 intercensal, 2010-2019, 2020-present). Geography: county (5-digit FIPS), state (2-digit FIPS), national ('00'). |
 | housing_units_per_1k_people | Housing units per 1,000 population | units per 1,000 persons | Total housing units divided by population in thousands. Population denominator from Census Population Estimates Program via cori.data.pep. Coverage: 2000-present. agg_var = population / 1,000, suitable for population-weighted averaging. |
 | housing_unit_change | Net change in housing units | units | Year-over-year net change in total housing units. NA for 2000, 2010, and 2020 — these boundary years span different decade series with different Census baselines, so the arithmetic difference reflects a methodological reset rather than real housing stock change. Coverage: 2001-present (excluding decade boundary years). |
 
